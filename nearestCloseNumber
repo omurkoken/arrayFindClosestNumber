@@ -1,0 +1,46 @@
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Kontrol için bir sayı giriniz: ");
+        int userInput = input.nextInt();
+
+        int[] array = {15,12,788,1,-1,-778,2,0};
+
+        closestNumbers(array, userInput);
+    }
+
+    static void closestNumbers(int[] array, int userInput) {
+        int[] sortedArray = Arrays.copyOf(array, array.length);
+        Arrays.sort(sortedArray);
+
+        System.out.println("Dizi " + Arrays.toString(array));
+
+        if (userInput <= sortedArray[0] || userInput >= sortedArray[sortedArray.length - 1]) {
+            System.out.println("hatalı giriş yaptınız , lütfen  "
+                    + sortedArray[0] + " ile " + sortedArray[sortedArray.length - 1] + " arasında bir rakam giriniz");
+        } else {
+            int lowerClosest = sortedArray[0];
+            int higherClosest = sortedArray[sortedArray.length - 1];
+
+            for (int i : sortedArray) {
+                if (i < userInput) {
+                    lowerClosest = i;
+                }
+            }
+
+            for (int j = sortedArray.length - 1; j >= 0; j--) {
+                if (sortedArray[j] > userInput) {
+                    higherClosest = sortedArray[j];
+                }
+            }
+
+            System.out.println("Küçük en yakın sayı " + lowerClosest);
+            System.out.println("Büyük en yakın sayı " + higherClosest);
+        }
+    }
+}
